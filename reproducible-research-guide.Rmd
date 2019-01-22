@@ -205,3 +205,19 @@ Then article annotation
 
 Then Trello/Keep/Github issues
 
+
+
+First commit with basic project structure
+
+Initiated Rproj, created folders, readme, loaded package here , checkpoint and tidyverse. Date set to "2019-01-21". Created toy examples for presentation, creating figures and tables, and markdown report. Also added reproducible research guide
+
+Go to add local repository
+Choose the file path of your project
+press add repository
+
+There will be a lot of changes. 
+Provide a summary and description.
+Commit to master. 
+Publish repository. 
+Choose private or public after your choosing. 
+
