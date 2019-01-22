@@ -221,3 +221,11 @@ Commit to master.
 Publish repository. 
 Choose private or public after your choosing. 
 
+Go to github
+
+go to the repo you just made
+
+go to settings
+go to collaborators
+add collaborator
+
