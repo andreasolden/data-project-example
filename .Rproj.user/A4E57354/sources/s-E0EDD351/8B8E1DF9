@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1548152502532.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "8B8E1DF9",
+    "lastKnownWriteTime" : 1548160516,
+    "last_content_update" : 1548160516483,
+    "path" : "C:/Users/s11855/OneDrive - Norges Handelshøyskole/Prosjekter/data-project-example/presentations/presentation-mtcars.Rpres",
+    "project_path" : "presentations/presentation-mtcars.Rpres",
+    "properties" : {
+        "cursorPosition" : "10,13",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 8,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_presentation"
+}

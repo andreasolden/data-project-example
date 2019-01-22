@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1548074319887.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "F426DF69",
+    "lastKnownWriteTime" : 1548094842,
+    "last_content_update" : 1548094842267,
+    "path" : "C:/Users/s11855/OneDrive - Norges Handelshøyskole/Prosjekter/data-project-example/scripts/create_table_example.R",
+    "project_path" : "scripts/create_table_example.R",
+    "properties" : {
+        "cursorPosition" : "6,11",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

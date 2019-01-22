@@ -1,0 +1,70 @@
+---
+title: "readme"
+author: "Andreas Olden"
+date: "January 21, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+If you have found yourself in this file you have downloaded my toy example for a reproducible research project from Github. 
+
+The project is designed to show an extensive, yet simple and explantory way to structure a data project. In addition to this readme, there is a document called 'reproducible-research-guide' which gives a detailed explanation for why you might do this, and an exlanation of all important software. This document on the other hand explains the structure of the toy example using mtcars, which is included in this project.
+
+####Checklist: 
+1. You should alway open the R-project file first
+2. You can manipulate files, move them and rename them from within the Rstudio console. 
+3. Knit this readme file. Install package dependencies. 
+4. Navigate to 'scripts' and open 'initiate-project.R' 
+  a. Install 'checkpoint', load it and set timestamp for dependency management. Set timestamp for all scripts. 
+  b. Install 'here', and load it for relative file paths
+  Install other packages you might frequently use, sich as 'tidyverse'
+5. Make sure project options are set to correct defaults, as specified in the 'reproducible-research-guide'
+6. Go play and review the examples. 
+
+####For full functionality, make sure you have:
+1. A Github account
+2. Github desktop installed
+3. A newish version of R and Rstudio
+4. A latex editor
+
+####Make it your own
+You can easily add the repo and commit it to Github to make it your own and to experiment with version control. I do however reccomend setting up your own project structure using the 'reproducible-research-guide'. This is more to see how to easy generate some data, create and save some figures and tables, create reports, presentations and papers. 
+
+Note that when you are using git and github it does not recognize empty folder so it can be good to add simple readme.txt's in each folder. Also, when using git and github you want to specify a gitignore file and not load your data to Github. 
+
+####Content of project
+#####Folder structure
+-data
+  -raw
+  -processed
+-figures
+-paper
+-presentations
+-paper
+-reports
+-results
+-scripts
+-tables
+
+Feel free to create your own set of folders. 
+
+#####The scripts
+-create_figure_example.R
+-create_table_example.R
+-initiate-project.R
+-load_some_data_and_save.R
+
+Hopefully these are self-explanatory. The 'initiate-project.R' should be used the first time you open the project. The second script to open is 'load_some_data_and_save.R'. Then you can run the two last scripts in any order you like. 
+
+#####Other stuff
+- 'reports' has a markdown file and a corresponding html file that creates a report for easily communicating data results. 
+- 'presentations' has an RPresentations (md) file that is a Markdown way of creating smooth presentations. 
+- 'paper' has a scientific paper produced by a local Latex editor. I do not reccomend it, rather I would use [Overleaf](https://www.overleaf.com/), but I wanted to include it as many people still use local tex-editors, and also to show the advantages of Latex over Markdown (they are few, but for scientific papers it can be great). I cover this in more depth in the 'reproducible-research-guide 
+
+
+
+
+

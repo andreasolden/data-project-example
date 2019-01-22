@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1548074289886.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "E3693D1F",
+    "lastKnownWriteTime" : 1548077071,
+    "last_content_update" : 1548077071,
+    "path" : "C:/Users/s11855/OneDrive - Norges Handelshøyskole/Prosjekter/data-project-example/scripts/load_some_data_and_save.R",
+    "project_path" : "scripts/load_some_data_and_save.R",
+    "properties" : {
+        "cursorPosition" : "31,0",
+        "scrollLine" : "1",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

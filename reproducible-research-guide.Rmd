@@ -1,0 +1,207 @@
+---
+title: "Reproducible-research-guide"
+author: "Andreas Olden"
+date: "January 21, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+# Reproducible research for scientific data projects
+
+Most of us have wasted countless of hours looking through folders with files such as: 'gdp_adj_march2017_v2_black_and_white' or something similar. Also, packages might change over time, so a function you ran in 2016 might no longer work. Most of have co-authors, and this creates even more files and code, and small problems like different working directories. Finally, academia have increasing focus on reproducility, code sharing, and sometimes data sharing. It is rather awkward when someone can't replicate your results, so, maybe it is time to do something about it? 
+
+The good news is that with a few lines of code and some version control, most of these issues can be dealt with by using Rprojects, relative file paths, a dependency management system for packages, and a version control system. It will add some complexity, but I think you are getting a bargain. By following these guidelines your research project will be reproducible, portable, and self-contained. This means that anyone can download it, run the code and recreate your exact results, regardless of operating system, r-version and who uses it. As a bonus, version control will make it easy to experiment with the code, without ruining the source code, and makes it easy to track changes to code. 
+
+Disclaimer: Most of my inspirations come from this [this brilliant guide by Iegor Rudnytskyi](https://www.r-bloggers.com/%F0%9F%93%81-project-oriented-workflow/). 
+
+I reccomend reading it, as it goes more in depth on the concepts than I do. I will however deviate from the guide in that I will use a different package package management system, use Github desktop rather than Git to lower the threshold to use this guide, and spend considerable time on writing text, making presentations etc. This guide is ment to be self-contained, even though it will reference Iegor Rudnytskyi's guide. 
+
+##R projects
+Most academic researchers I have come across write several scripts, calling working directories as they go.
+
+An Rprojects is a way of structuring a project. Most notably it exports project options, and sets the WD by default to the folder the Rproject is in in for all sessions running the Rproject file. This comes in handy in the next session on relative file paths. 
+
+You initiate an R project by navigating to the file menu and selecting 'new project'. You then have several options, but choose 'new directory' for now. That gives you a project type menu, choose 'new project' again. The next menu gives several options. First, set the directory name. Make sure it is meaningful and explains your project. Second, choose a path for it. Finally, make sure the box 'create git repository' is checked and create the project. 
+
+Now you have created a folder with an Rproj file. You should always run this file to open R, as it will make sure your project options are loaded and that the WD is correct. Note that there are two additional files, '.git' and '.Rproj.user' that may only be visible in the files pane of Rstudio. Ignore these for now. 
+
+Navigate to tools/project options. Turn off 'Restore .Rdata', 'Save workspace to R.data' and 'Always save history', they are only cumbersome. 
+
+For more information see <https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects>
+
+##Readme
+Go to the 'add file' button, you know, the white one in the top left corner with a plus on it. Open an RMarkdown file, give it a title and your name, make sure HTML is chosen and create it. A new untitled file should be open with a toy example. Open it and save it. When saved, Knit it. This will likely install some packages. I reccomend doing this here, as I have had issues with the dependency tool (that we have yet to cover) when creating it after it has started. Ignore this file for now. 
+
+##Populate the project with folders,
+As a toy example, consider just putting these folders in there: 
+- scripts
+- reports
+
+I personally almost always add these folders for a project: 
+- data
+  -processed
+  -raw
+- figures
+- paper
+- reports
+- presentations
+- results
+- tables
+- scripts 
+
+Note: Later, we introduce Github. Github does not recognize empty folders so I also always add readme.txt to each of these explaining what goes into it, which makes it easier for co-authors to jump in. 
+
+##Package management and relative file paths
+
+This is the first point from where I deviate from Iegor Rudnytskyi's guide and I will therefore ellaborate a bit further. 
+
+A package manager is an R-package that makes sure that the version of a package used to create some output is the same over time. Basically, you want to be sure that if you used 'Ggplot2' version 3.0.0 a year ago to create some figure, running the same script today will produce the same figure, even if 'Ggplot2' version 3.1.0 is out. This might sounds trivial, but certain packages undergo dramatic changes, and can create unnecessary problems. 
+
+The two simplest solutions are the packages ['Packrat'](https://rstudio.github.io/packrat/) and ['Checkpoint'](https://cran.r-project.org/web/packages/checkpoint/vignettes/checkpoint.html). 
+
+Iegor Rudnytskyi reccomends 'packrat' and there are strong reasons to do so. It is integrated in Rstudio and will show up in the package pane and is a one-stop shop. It creates a local library of your packages, and when you have created a snapshot of it creates a lockfile that keeps track of the changes to the packages. If a co-author adds a package, Packrat will tell you to install it. There are two things I do not like about Packrat. First, I rely heavily on ['Tidyverse'](https://www.tidyverse.org/). Whenever I have tried to install it when Packrat is running, it has take about 4 hours. OK, this is just the first time, but I might install more packages later and suddenly having hours of my day that I can work on a project is nto ideal. Second, even if I could live with it, I know several co-authors that wouldn't. There are ways around this, but again, co-authors. I need something that is supersimple that I can convince people top use. The second thing I dont like about Packrat is that is has an auto.snapshot command that does not work. I wasted plenty of time trying to figure it out, only to finally be told [that it was a misfeature](https://groups.google.com/forum/#!topic/packrat-discuss/wSRYva9a1no). Though tons of respect for giving it to me straight. This means I have to make manual snapshots, which makes it on par with the alternative checkpoint.
+
+Checkpoint the package manager I currently use. It is not integrated and you have to run it in the top of each script. However, I always have some code to for instance loading some packages, and adding two lines of code, that are the same across all scripts, is survivable. 
+
+That aside, Checkpoint IS GREAT. It has a single function 'checkpoint()'. You simply add a date to the function, for instance checkpoint("todays date") and it will make sure that all packages used are the ones that were available at [CRAN](https://cran.r-project.org/) for that date. CRAN is the webiste that contains most r-packages, and where you get packages when you write install.packages("random package").
+
+Checkpoint is loads packages from MRAN "Microsoft R Archived Network" every day, and has every single version of every single package on CRAN from 2014-09-17.
+
+There are alternatives, like Docker, Rstudio package manager and reproducible, but I find Checkpoint great, extremely easy and hence possible to convince pepole to actually use. 
+
+Feel free to explore by setting different dates and use Sys.info() and sessionInfo() to see how the package versions changes. 
+
+The second great package out there for reproducible code is the package [here]( https://cran.r-project.org/web/packages/here/here.pdf) for relative file paths. As you are now in an Rproject, the WD is by default where the Rproj file is, which should be in the top folder of your project. The package here allows you to use simple syntax to reference files in different folders. Lets say you have a script that have processed some data and you want to save it in the myproject/data/processed folder, you simply write:
+
+saveRDS(mtcars_df, file = here("data", "processed", "mtcars_df.rds")) 
+
+or 
+
+saveRDS(mtcars_df, file = here("data/processed/mtcars2_df.rds")). 
+
+Send it to your co-authors, and these relative paths still works, and they can run the code, without doing anything like changing the WD. 
+
+Now lets implement this in our project structure. I do this by creating a script called 'initiate-project.R'. In it I run a few simple commands:
+
+- install.packages("checkpoint")
+- library("checkpoint")
+- checkpoint("2019-01-21") #Set your date of choice, note American format on date
+- install.packages("here")
+- Install other packages I rely heavily on
+  -Install.packages("tidyverse")
+
+Thats it. From now on, put reports in report folder, scripts in script folder etc. and use relative paths to reference it. Make sure that each script begins with
+
+- library("checkpoint")
+- checkpoint("2019-01-21") 
+
+Note that checkpoint creates a local library for each checkpoint, with corresponding packages, so that it is convenient to try to limit the number of different dates you use. However, there is nothing wrong with using an older date for a single script if that is what is needed to get the job done. 
+
+##Version control: Git, Github, and Github desktop
+
+Now to the biggie. There are a million guides out there on how to use Git, so I will only show the very basics. Strictly speaking, everything up to this point can be done without a version control system. So if you for instance work through Dropbox, you can use everything up to this point and still get much more reproducible and portable code than you used to. That said you really should use version control, and I will try to make it as soft of an intro as possible. 
+
+Git is a version control system. Github is a hosting system, an online version control hosting platform, that works well with Git. When you use Git, you have two options, the git terminal and [Github Desktop](https://desktop.github.com/) which is a graphical user interface where everything is done by pushing buttons. This might be limiting, but it is a great way to begin with Git and to avoid learning even more commands and syntax. Again, I highly reccomend it, whiel Iegor Rudnytskyi uses the terminal. 
+
+The basics:
+- commit
+- repo
+- push
+- pull
+- branch
+- clone
+- merge
+
+Version control is more than backup. It is a way to track changes to code. 
+
+Second, [GITHUB HAS FREE ACADEMIC PRO LICENSES]( https://help.github.com/articles/applying-for-an-academic-research-discount/).
+
+There are a couple of points I also would like to reiterate. It seems tempting to use a standard folder structure that you post to GitHub instead of making a new one each time. Just remember that Github does not upload empty folders, so that you would need something like a readme file in each folder for it to work. If you do make your own template, make sure to set all packrat setting as in the guide. 
+
+Also, the .gitignore file is invaluable. I often work with data that due to privacy concerns cannot be stored outside of Norway. Then I can simply add the data folder to the .gitignore file and it is never loaded to Github. Everything else is reproducible, but the data is still private. This also works with a server, but then Github desktop might no longer be your best choice.
+
+You should not add data to Github. Because how Git works! LINEAR. Any co-author should be able to reproduce processed data by the files that made it. Exceptions can be made if that is very time consuming, but then it should happen as seldom as possible. 
+
+A workflow might look like: example with co-author
+
+
+##Markdown and Overleaf/Latex
+add resources from toy-examples
+
+I use paid version. It is worth it. 
+
+Up to this point I have only made minor comments on Iegor Rudnytskyi’s guide. This is the exact same point most guides quit. It seems great for data and data projects, but what about writing? Citation tools? Article annotation? Project management tools?
+
+Well, I assume most data scientists write their work in Markdown. It is easy to use (this guide is written in Markdown), and if you have made an update in a figure it is automatically imported to your paper the next time you compile it. An alternative is Latex, known for its nice type-setting, good referencing, tons of journal templates for easy submission, same features as Markdown, and historically a favorite of Econ academia, which makes it a go to tool if you have collaborators. Note that Markdown has gotten most journal templates in place in recent times, which bridges some of the gap. Another upside with Markdown is that everything is self-contained. You write in RStudio, no need for additional software!
+
+However, as an academic I might make 10 000 minor changes to my paper and hone it for years. Yes, years. Making a commit each time seems over the top. Welcome [Overleaf]( https://www.overleaf.com/). Overleaf is an online tex-editor that allows multiple authors (there is a stripped down version that is free, a student discount, as well as a full price version). It has the same functionality as Markdown and Latex, meaning that if you update a figure or a table it can automatically update the paper (given integration with Github or Dropbox). On top of that it has a functional dictionary, in-line change tracker, commenting, its own version control, possible to see who write what and when, as well as a rich text format that makes reading your writing much, much easier. (I know academics who paste their text into word for processing and then paste it back to the Latex environment). This is, in my opinion, simply the best tool out there. Note however that if it wasn’t for the journal templates, I would probably use google docs in combination with Markdown, so if you do not plan to stay on in academia, use google docs for longer things when collaborating and text is important, while use Markdown for presentations, table and figure heavy stuff. 
+
+Overleaf works the way that you acticely have to tell it when to import and export (commit). That is the next step. 
+
+
+##Step by step guide 
+
+1.	Open Rstudio
+2.	Go to file and press new project
+3.	Choose New directory
+4.	Choose new project
+5.	Give it a meaningful name, place it in a  meaningful folder, and check create a git repository
+6.	Go to tools and project options. Turn off ‘Restore .Rdata’, ‘Save workspace’ and ‘Always save history’
+7.	Create Markdown readme file and knit. I have had troubles with Markdown if this is not done before next steps. 
+8.	Navigate to project folder and populate with subfolders. Note that Github does NOT upload empty folders, so populate them with simple readme’s (I prefer text for this, but some use markdown for these as well). These readme’s can have simple explanations. 
+
+My structure
+        data
+		-processed
+		-raw
+	figures
+	paper
+	presentations
+	results
+	scripts
+	tables
+
+9.      Initiate R FILE UPDATE 
+9.	Go to your version of Git, in my instance github desktop. 
+10.	Go to file and add local repository
+11.	Write a summary and description
+a.	First commit to make a reproducible research project template
+b.	This commit iniatiates a Rproject populated with the most common folders. Projects options are set to turn off Rdata and history. 
+12.	Commit to master
+13.	Publish repository
+14.	Go to your repository, choose repository menu, go to ignored files, add data*/
+15.	Go to r, open a script, call it for instance initiate, save it in scripts. 
+install.packages("checkpoint")
+library("checkpoint")
+checkout("2019-01-21") #or todays date
+16.	I like to install other packages as well, for instance, I rely heavily on tidyverse, stargazer, , and like to have these preinstalled with an up to date version
+17.	Now start your project. Remember to add checkout(“date”) to all scripts. Note that date is American date. 
+18.	Go to github and add collaborators. 
+
+
+Remember: 
+•	do NOT load data to github
+•	Always open rproject file first
+•	Always use relative file paths
+•	Instead of using windows explorer, now you do everything from rproject file
+•	Sys.info() and sessionInfo() are good ways to experiment with checkpoint 
+•	Note that often the r-user profile and git-files are “hidden” how does this affect things? Available through Rstudio. 
+
+Questions: 
+•	Should we show gitignore and git? They are only available from within rprojects
+
+
+##Honorable mentions, and possible future blog posts
+
+Then Zotero for Overleaf
+
+Then Zotero Chrome plugin
+
+Then article annotation
+
+Then Trello/Keep/Github issues
+

@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1548073104764.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "E25A0E05",
+    "lastKnownWriteTime" : 1548074189,
+    "last_content_update" : 1548074189081,
+    "path" : "C:/Users/s11855/OneDrive - Norges Handelshøyskole/Prosjekter/data-project-example/scripts/initiate-project.R",
+    "project_path" : "scripts/initiate-project.R",
+    "properties" : {
+        "cursorPosition" : "0,0",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
