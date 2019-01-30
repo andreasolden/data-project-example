@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1548323259068.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3526921027",
+    "id" : "A6515F1",
+    "lastKnownWriteTime" : 1548323254,
+    "last_content_update" : 1548323287915,
+    "path" : "C:/Users/s11855/Downloads/summarytest.Rmd",
+    "project_path" : null,
+    "properties" : {
+        "cursorPosition" : "10,11",
+        "last_setup_crc32" : "FAB03B5F91c18f23",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 9,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

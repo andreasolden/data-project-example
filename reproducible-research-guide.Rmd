@@ -8,7 +8,7 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-
+https://www.overleaf.com/blog/195-new-collaborate-online-and-offline-with-overleaf-and-git-beta
 
 # Reproducible research for scientific data projects
 
@@ -142,6 +142,9 @@ However, as an academic I might make 10 000 minor changes to my paper and hone i
 
 Overleaf works the way that you acticely have to tell it when to import and export (commit). That is the next step. 
 
+install.packages("httr", repos = "https://mran.microsoft.com/")
+MÅ GJØRES I MARKDOWN
+
 
 ##Step by step guide 
 
@@ -193,6 +196,8 @@ Remember:
 
 Questions: 
 •	Should we show gitignore and git? They are only available from within rprojects
+
+
 
 
 ##Honorable mentions, and possible future blog posts
