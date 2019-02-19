@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1548167530614.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1568313598",
+    "id" : "26AEE671",
+    "lastKnownWriteTime" : 1548857448,
+    "last_content_update" : 1548857448680,
+    "path" : "~/prosjekter/data-project-example/reproducible-research-guide.Rmd",
+    "project_path" : "reproducible-research-guide.Rmd",
+    "properties" : {
+        "cursorPosition" : "10,95",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 8,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

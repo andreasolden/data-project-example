@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1548074220737.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2644530646",
+    "id" : "EE87B823",
+    "lastKnownWriteTime" : 1548078322,
+    "last_content_update" : 1548078322505,
+    "path" : "~/prosjekter/data-project-example/scripts/create_figure_example.R",
+    "project_path" : "scripts/create_figure_example.R",
+    "properties" : {
+        "cursorPosition" : "20,6",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
